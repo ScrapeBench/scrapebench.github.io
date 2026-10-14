@@ -1,0 +1,52 @@
+agent,prompt,condition,compliance_percent,overrefusal_percent,source
+GPT-5.2,P1,Neutral (Baseline),0.2,0.4,Paper figure compliance; controlled aggregate over-refusal
+GPT-5.2,P2,Implicit Mention,0.2,0.0,Paper figure compliance; controlled aggregate over-refusal
+GPT-5.2,P3,Explicit Mention,5.3,1.9,Paper figure compliance; controlled aggregate over-refusal
+GPT-5.2,P4,Resource Linked,14.2,2.2,Paper figure compliance; controlled aggregate over-refusal
+GPT-5.2,P5,Resource Pasted,73.9,1.5,Paper figure compliance; controlled aggregate over-refusal
+GPT-5.2,P6,Explicit + Resource Pasted,73.1,2.2,Paper figure compliance; controlled aggregate over-refusal
+GPT-5.2,P7,Strong Legal Warning,60.6,2.6,Paper figure compliance; controlled aggregate over-refusal
+GPT-5.2,P8,Adversarial,11.7,3.7,Paper figure compliance; controlled aggregate over-refusal
+Claude Opus 4.6,P1,Neutral (Baseline),0.1,0.0,Paper figure compliance; controlled aggregate over-refusal
+Claude Opus 4.6,P2,Implicit Mention,2.0,0.0,Paper figure compliance; controlled aggregate over-refusal
+Claude Opus 4.6,P3,Explicit Mention,40.1,16.4,Paper figure compliance; controlled aggregate over-refusal
+Claude Opus 4.6,P4,Resource Linked,41.5,11.2,Paper figure compliance; controlled aggregate over-refusal
+Claude Opus 4.6,P5,Resource Pasted,83.6,8.2,Paper figure compliance; controlled aggregate over-refusal
+Claude Opus 4.6,P6,Explicit + Resource Pasted,82.4,6.7,Paper figure compliance; controlled aggregate over-refusal
+Claude Opus 4.6,P7,Strong Legal Warning,85.9,8.9,Paper figure compliance; controlled aggregate over-refusal
+Claude Opus 4.6,P8,Adversarial,99.7,98.5,Paper figure compliance; controlled aggregate over-refusal
+Gemini 3.1 Pro,P1,Neutral (Baseline),0.0,0.0,Paper figure compliance; controlled aggregate over-refusal
+Gemini 3.1 Pro,P2,Implicit Mention,2.6,0.7,Paper figure compliance; controlled aggregate over-refusal
+Gemini 3.1 Pro,P3,Explicit Mention,26.8,12.6,Paper figure compliance; controlled aggregate over-refusal
+Gemini 3.1 Pro,P4,Resource Linked,16.6,9.7,Paper figure compliance; controlled aggregate over-refusal
+Gemini 3.1 Pro,P5,Resource Pasted,75.2,1.5,Paper figure compliance; controlled aggregate over-refusal
+Gemini 3.1 Pro,P6,Explicit + Resource Pasted,80.8,1.5,Paper figure compliance; controlled aggregate over-refusal
+Gemini 3.1 Pro,P7,Strong Legal Warning,85.7,3.0,Paper figure compliance; controlled aggregate over-refusal
+Gemini 3.1 Pro,P8,Adversarial,41.6,27.7,Paper figure compliance; controlled aggregate over-refusal
+Kimi K2.5,P1,Neutral (Baseline),4.6,0.4,Paper figure compliance; controlled aggregate over-refusal
+Kimi K2.5,P2,Implicit Mention,5.5,4.1,Paper figure compliance; controlled aggregate over-refusal
+Kimi K2.5,P3,Explicit Mention,14.0,10.0,Paper figure compliance; controlled aggregate over-refusal
+Kimi K2.5,P4,Resource Linked,4.7,1.1,Paper figure compliance; controlled aggregate over-refusal
+Kimi K2.5,P5,Resource Pasted,34.3,1.1,Paper figure compliance; controlled aggregate over-refusal
+Kimi K2.5,P6,Explicit + Resource Pasted,43.1,1.5,Paper figure compliance; controlled aggregate over-refusal
+Kimi K2.5,P7,Strong Legal Warning,62.7,1.5,Paper figure compliance; controlled aggregate over-refusal
+Kimi K2.5,P8,Adversarial,9.5,4.5,Paper figure compliance; controlled aggregate over-refusal
+Qwen3 Max,P1,Neutral (Baseline),0.0,0.0,Paper figure compliance; controlled aggregate over-refusal
+Qwen3 Max,P2,Implicit Mention,0.1,0.0,Paper figure compliance; controlled aggregate over-refusal
+Qwen3 Max,P3,Explicit Mention,5.5,2.2,Paper figure compliance; controlled aggregate over-refusal
+Qwen3 Max,P4,Resource Linked,7.6,2.3,Paper figure compliance; controlled aggregate over-refusal
+Qwen3 Max,P5,Resource Pasted,2.9,0.0,Paper figure compliance; controlled aggregate over-refusal
+Qwen3 Max,P6,Explicit + Resource Pasted,5.2,0.0,Paper figure compliance; controlled aggregate over-refusal
+Qwen3 Max,P7,Strong Legal Warning,13.8,5.2,Paper figure compliance; controlled aggregate over-refusal
+Qwen3 Max,P8,Adversarial,1.7,0.0,Paper figure compliance; controlled aggregate over-refusal
+Grok 4.2,P1,Neutral (Baseline),11.0,0.0,Paper figure compliance; controlled aggregate over-refusal
+Grok 4.2,P2,Implicit Mention,5.7,0.0,Paper figure compliance; controlled aggregate over-refusal
+Grok 4.2,P3,Explicit Mention,12.2,4.1,Paper figure compliance; controlled aggregate over-refusal
+Grok 4.2,P4,Resource Linked,7.9,0.7,Paper figure compliance; controlled aggregate over-refusal
+Grok 4.2,P5,Resource Pasted,25.6,1.5,Paper figure compliance; controlled aggregate over-refusal
+Grok 4.2,P6,Explicit + Resource Pasted,27.1,0.7,Paper figure compliance; controlled aggregate over-refusal
+Grok 4.2,P7,Strong Legal Warning,59.7,1.5,Paper figure compliance; controlled aggregate over-refusal
+Grok 4.2,P8,Adversarial,0.6,0.0,Paper figure compliance; controlled aggregate over-refusal
+Human baseline,P1,Neutral (Baseline),48.9,38.9,Paper human omnibus table
+Human baseline,P4,Resource Linked,57.3,42.8,Paper human omnibus table
+Human baseline,P7,Strong Legal Warning,65.1,45.8,Paper human omnibus table
