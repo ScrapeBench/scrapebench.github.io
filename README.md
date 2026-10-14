@@ -1,8 +1,8 @@
 # ScrapeBench Website
 
-Public project website for **ScrapeBench: Evaluating Legal Compliance of AI Agents in Website Scraping**.
+Project website for **ScrapeBench: Evaluating Legal Compliance of AI Agents in Website Scraping**.
 
-Website: https://imperialite.github.io/scrapebench-website/
+Publication is paused. This repository is private, GitHub Pages is disabled, and the deployment workflow is disabled. Continue editing and previewing locally until the authors explicitly request publication.
 
 This repository is independent of the paper repository. It contains the website source, display data, and images. Building and publishing it requires no access to the manuscript or experiments.
 
@@ -34,13 +34,13 @@ python -m http.server 8000 --directory dist
 
 Open http://localhost:8000. Run the build again after changing source files, then refresh the browser. `dist/` is generated and is excluded from Git.
 
-## Publish updates
+## Publication is paused
 
-Commit and push changes to `main`, or edit a source file on GitHub and commit it to `main`. The **Deploy Website to GitHub Pages** workflow rebuilds the website and publishes `dist/` automatically. Its progress appears in the repository's Actions tab.
+Changes can be committed and pushed to this private repository without publishing the website. The **Deploy Website to GitHub Pages** workflow is disabled in GitHub, and the Pages deployment has been removed.
 
-GitHub Pages uses **GitHub Actions** as its publishing source. The workflow can also be run manually through **Actions → Deploy Website to GitHub Pages → Run workflow**.
+Do not make the repository public, enable Pages, or re-enable the deployment workflow until the authors explicitly request publication. The workflow file is retained for that future step. GitHub Pages can expose the website publicly even when its source repository is private.
 
-The build uses relative asset and data URLs, so the website works under the `/scrapebench-website/` project path. Stylesheets use content-specific filenames to prevent old formatting from being reused after updates.
+The build uses relative asset and data URLs. Stylesheets use content-specific filenames to prevent old formatting from being reused after updates.
 
 ## Scope
 
