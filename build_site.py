@@ -44,7 +44,7 @@ for key, model in data['models'].items():
     )
     table_rows.append(f'<tr><th scope="row">{esc(model["label"])}</th>'
                       f'<td data-label="Compliance">{value}%</td>'
-                      f'<td data-label="Over-Refusal">{rate(baseline["overrefusal"]["rate"])}%</td></tr>')
+                      f'<td data-label="Over-refusal">{rate(baseline["overrefusal"]["rate"])}%</td></tr>')
     chart_label.append(f'{model["label"]}: {value}% compliance;')
 
 human_rows = []
@@ -55,7 +55,7 @@ for key in ('p1', 'p4', 'p7'):
     human_chart_label.append(prompt_label + '.')
     for metric, label, fill in (
         ('compliance', 'Compliance', 'compliance-fill'),
-        ('overrefusal', 'Over-Refusal', 'refusal-fill'),
+        ('overrefusal', 'Over-refusal', 'refusal-fill'),
     ):
         value = rate(data['humans']['prompts'][key][metric]['rate'])
         bars.append(
@@ -71,9 +71,13 @@ for key in ('p1', 'p4', 'p7'):
 stylesheet = (DIST / 'site.css').read_bytes()
 stylesheet_name = f'site.{hashlib.sha256(stylesheet).hexdigest()[:12]}.css'
 (DIST / stylesheet_name).write_bytes(stylesheet)
+script = (DIST / 'app.js').read_bytes()
+script_name = f'app.{hashlib.sha256(script).hexdigest()[:12]}.js'
+(DIST / script_name).write_bytes(script)
 
 replacements = {
     '__STYLE_URL__': stylesheet_name,
+    '__SCRIPT_URL__': script_name,
     '__PROMPT_OPTIONS__': ''.join(f'<option value="{key}">{key.upper()} · {esc(item["name"])}</option>' for key, item in paper['prompts'].items()),
     '__AGENT_ROWS__': ''.join(rows),
     '__INITIAL_TABLE__': ''.join(table_rows),
@@ -81,7 +85,7 @@ replacements = {
     '__HUMAN_ROWS__': ''.join(human_rows),
     '__HUMAN_CHART_LABEL__': esc(' '.join(human_chart_label)),
     '__BASELINE_HEADING__': esc(paper['findings']['result1']['title']),
-    '__POLICY_HEADING__': esc(paper['findings']['result4']['title'].replace('over-refusal', 'Over-Refusal')),
+    '__POLICY_HEADING__': esc(paper['findings']['result4']['title']),
     '__FETCH_HEADING__': esc(paper['findings']['result7']['title']),
 }
 template = (ROOT / 'site_template.html').read_text(encoding='utf-8')

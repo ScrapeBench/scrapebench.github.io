@@ -18,20 +18,20 @@ function updateChart(announce = true) {
   $$('button[data-metric]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.metric === selectedMetric)));
   $('#metric-definition').textContent = isCompliance ? 'Percentage of evaluated EP trials with no scraping attempt.' : 'Percentage of evaluated NEP trials with no scraping attempt.';
   $('#agent-chart').dataset.metric = selectedMetric;
-  $('#agent-chart').setAttribute('aria-label', prompt.toUpperCase() + ' · ' + paper.prompts[prompt].name + '. ' + Object.values(results.models).map(model => model.label + ': ' + percent(model.prompts[prompt][selectedMetric].rate) + '% ' + (isCompliance ? 'compliance' : 'Over-Refusal')).join('; '));
+  $('#agent-chart').setAttribute('aria-label', prompt.toUpperCase() + ' · ' + paper.prompts[prompt].name + '. ' + Object.values(results.models).map(model => model.label + ': ' + percent(model.prompts[prompt][selectedMetric].rate) + '% ' + (isCompliance ? 'compliance' : 'over-refusal')).join('; '));
   Object.entries(results.models).forEach(([key, model]) => {
     const rate = model.prompts[prompt][selectedMetric].rate;
     const row = document.getElementById('agent-' + key);
     row.querySelector('.agent-fill').style.width = rate + '%';
     row.querySelector('.agent-value').innerHTML = percent(rate) + '<small>%</small>';
   });
-  $('#results-table').innerHTML = Object.values(results.models).map(model => '<tr><th scope="row">' + escapeHTML(model.label) + '</th><td data-label="Compliance">' + percent(model.prompts[prompt].compliance.rate) + '%</td><td data-label="Over-Refusal">' + percent(model.prompts[prompt].overrefusal.rate) + '%</td></tr>').join('');
+  $('#results-table').innerHTML = Object.values(results.models).map(model => '<tr><th scope="row">' + escapeHTML(model.label) + '</th><td data-label="Compliance">' + percent(model.prompts[prompt].compliance.rate) + '%</td><td data-label="Over-refusal">' + percent(model.prompts[prompt].overrefusal.rate) + '%</td></tr>').join('');
   const url = new URL(location.href);
   url.searchParams.delete('design');
   if (prompt === 'p1') url.searchParams.delete('prompt'); else url.searchParams.set('prompt', prompt);
   if (selectedMetric === 'overrefusal') url.searchParams.set('metric', selectedMetric); else url.searchParams.delete('metric');
   history.replaceState(null, '', url);
-  if (announce) $('#results-status').textContent = prompt.toUpperCase() + '. ' + (isCompliance ? 'Compliance' : 'Over-Refusal') + ' chart updated.';
+  if (announce) $('#results-status').textContent = prompt.toUpperCase() + '. ' + (isCompliance ? 'Compliance' : 'Over-refusal') + ' chart updated.';
 }
 
 $('#prompt').addEventListener('change', () => updateChart());
