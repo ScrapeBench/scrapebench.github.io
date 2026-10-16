@@ -9,13 +9,16 @@ let selectedMetric = new URLSearchParams(location.search).get('metric') === 'ove
 const initialParams = new URLSearchParams(location.search);
 const initialPrompt = initialParams.get('prompt');
 if (promptKeys.includes(initialPrompt)) $('#prompt').value = initialPrompt;
+const humanPromptKeys = ['p1', 'p4', 'p7'];
+let humanMetric = initialParams.get('human-metric') === 'overrefusal' ? 'overrefusal' : 'compliance';
+if (humanPromptKeys.includes(initialParams.get('human-prompt'))) $('#human-prompt').value = initialParams.get('human-prompt');
 
 function updateChart(announce = true) {
   if (!results || !paper) return;
   const prompt = $('#prompt').value;
   const isCompliance = selectedMetric === 'compliance';
   $('#prompt-text').textContent = '"' + paper.prompts[prompt].text + '"';
-  $$('button[data-metric]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.metric === selectedMetric)));
+  $$('#explore button[data-metric]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.metric === selectedMetric)));
   $('#metric-definition').textContent = isCompliance ? 'Percentage of evaluated EP trials with no scraping attempt.' : 'Percentage of evaluated NEP trials with no scraping attempt.';
   $('#agent-chart').dataset.metric = selectedMetric;
   $('#agent-chart').setAttribute('aria-label', prompt.toUpperCase() + ' · ' + paper.prompts[prompt].name + '. ' + Object.values(results.models).map(model => model.label + ': ' + percent(model.prompts[prompt][selectedMetric].rate) + '% ' + (isCompliance ? 'compliance' : 'over-refusal')).join('; '));
@@ -35,10 +38,36 @@ function updateChart(announce = true) {
 }
 
 $('#prompt').addEventListener('change', () => updateChart());
-$$('button[data-metric]').forEach(button => button.addEventListener('click', () => {
+$$('#explore button[data-metric]').forEach(button => button.addEventListener('click', () => {
   selectedMetric = button.dataset.metric;
-  $$('button[data-metric]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+  $$('#explore button[data-metric]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
   updateChart();
+}));
+
+function updateHumanChart(announce = true) {
+  if (!results || !paper) return;
+  const prompt = $('#human-prompt').value;
+  const isCompliance = humanMetric === 'compliance';
+  const value = percent(results.humans.prompts[prompt][humanMetric].rate);
+  const measure = isCompliance ? 'compliance' : 'over-refusal';
+  $('#human-prompt-text').textContent = '"' + paper.prompts[prompt].text + '"';
+  $$('#human-explore button[data-metric]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.metric === humanMetric)));
+  $('#human-metric-definition').textContent = 'Percentage of human decisions on ' + (isCompliance ? 'EP' : 'NEP') + ' websites choosing not to scrape.';
+  $('#human-chart').dataset.metric = humanMetric;
+  $('#human-chart').setAttribute('aria-label', prompt.toUpperCase() + ' · ' + paper.prompts[prompt].name + '. Human participants: ' + value + '% ' + measure + '.');
+  $('#human-result .agent-fill').style.width = value + '%';
+  $('#human-result .agent-value').innerHTML = value + '<small>%</small>';
+  const url = new URL(location.href);
+  if (prompt === 'p1') url.searchParams.delete('human-prompt'); else url.searchParams.set('human-prompt', prompt);
+  if (humanMetric === 'overrefusal') url.searchParams.set('human-metric', humanMetric); else url.searchParams.delete('human-metric');
+  history.replaceState(null, '', url);
+  if (announce) $('#human-results-status').textContent = 'Human baseline, ' + prompt.toUpperCase() + ': ' + value + '% ' + measure + '.';
+}
+
+$('#human-prompt').addEventListener('change', () => updateHumanChart());
+$$('#human-explore button[data-metric]').forEach(button => button.addEventListener('click', () => {
+  humanMetric = button.dataset.metric;
+  updateHumanChart();
 }));
 
 const readJSON = file => fetch(file).then(response => {
@@ -49,11 +78,14 @@ Promise.all([readJSON('results.json'), readJSON('paper-content.json')]).then(([d
   results = data;
   paper = manuscript;
   promptKeys.forEach(key => { $('#prompt option[value="' + key + '"]').textContent = key.toUpperCase() + ' · ' + paper.prompts[key].name; });
-  requestAnimationFrame(() => updateChart(false));
+  requestAnimationFrame(() => { updateChart(false); updateHumanChart(false); });
 }).catch(() => {
   $('#agent-chart').removeAttribute('role');
   $('#agent-chart').innerHTML = '<p>Results could not load. <a href="results.csv">Download the results CSV</a> or reload the page.</p>';
   $('#results-status').textContent = 'The interactive results could not be loaded.';
+  $('#human-prompt').value = 'p1';
+  $$('#human-explore select, #human-explore button[data-metric]').forEach(control => { control.disabled = true; });
+  $('#human-results-status').textContent = 'Interactive human results could not load. Showing P1 compliance. All three prompts are available in the numerical results table.';
 });
 
 $('#copy-citation').addEventListener('click', async () => {
