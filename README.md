@@ -2,7 +2,9 @@
 
 Project website for **ScrapeBench: Evaluating Legal Compliance of AI Agents in Website Scraping**.
 
-Publication is paused. This repository is private, GitHub Pages is disabled, and the deployment workflow is disabled. Continue editing and previewing locally until the authors explicitly request publication.
+Public website: https://imperialite.github.io/scrapebench-website/
+
+Public release was authorized on 16 October 2026. The website remains editable in this repository.
 
 This repository is independent of the paper repository. It contains the website source, display data, and images. Building and publishing it requires no access to the manuscript or experiments.
 
@@ -34,13 +36,13 @@ python -m http.server 8000 --directory dist
 
 Open http://localhost:8000. Run the build again after changing source files, then refresh the browser. `dist/` is generated and is excluded from Git.
 
-## Publication is paused
+## Publishing
 
-Changes can be committed and pushed to this private repository without publishing the website. The **Deploy Website to GitHub Pages** workflow is disabled in GitHub, and the Pages deployment has been removed.
+The **Deploy Website to GitHub Pages** workflow builds and publishes changes pushed to `main`. It can also be run manually from GitHub Actions.
 
-Do not make the repository public, enable Pages, or re-enable the deployment workflow until the authors explicitly request publication. The workflow file is retained for that future step. GitHub Pages can expose the website publicly even when its source repository is private.
+This release has no scheduled end. The earlier four-hour preview and its shutdown automation are finished. The separate ChatGPT Sites preview retains its existing restricted viewer access.
 
-The build uses relative asset and data URLs. Stylesheets use content-specific filenames to prevent old formatting from being reused after updates.
+The build uses relative asset and data URLs. Stylesheets and scripts use content-specific filenames to prevent old formatting from being reused after updates.
 
 ## Scope
 
