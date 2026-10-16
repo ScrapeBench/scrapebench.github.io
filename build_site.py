@@ -47,16 +47,25 @@ for key, model in data['models'].items():
                       f'<td data-label="Over-refusal">{rate(baseline["overrefusal"]["rate"])}%</td></tr>')
     chart_label.append(f'{model["label"]}: {value}% compliance;')
 
-human_keys = ('p1', 'p4', 'p7')
-human_initial_rate = rate(data['humans']['prompts']['p1']['compliance']['rate'])
-human_chart_label = f'P1 · {paper["prompts"]["p1"]["name"]}. Human participants: {human_initial_rate}% compliance.'
-human_table = []
-for key in human_keys:
+human_rows = []
+human_chart_label = ['Human Baseline.']
+for key in ('p1', 'p4', 'p7'):
     prompt_label = f'{key.upper()} · {paper["prompts"][key]["name"]}'
-    prompt_result = data['humans']['prompts'][key]
-    human_table.append(f'<tr><th scope="row">{esc(prompt_label)}</th>'
-                       f'<td>{rate(prompt_result["compliance"]["rate"])}%</td>'
-                       f'<td>{rate(prompt_result["overrefusal"]["rate"])}%</td></tr>')
+    bars = []
+    human_chart_label.append(prompt_label + '.')
+    for metric, label, fill in (
+        ('compliance', 'Compliance', 'compliance-fill'),
+        ('overrefusal', 'Over-refusal', 'refusal-fill'),
+    ):
+        value = rate(data['humans']['prompts'][key][metric]['rate'])
+        bars.append(
+            f'<div class="human-bar-row"><span class="sr-only">{label}</span>'
+            f'<div class="human-track"><div class="human-fill {fill}" style="width:{value}%"></div></div>'
+            f'<strong class="human-value">{value}<small>%</small></strong></div>'
+        )
+        human_chart_label.append(f'{label}: {value}%.')
+    human_rows.append(f'<div class="human-prompt-group"><h4>{esc(prompt_label)}</h4>'
+                      f'<div class="human-bars">{"".join(bars)}</div></div>')
 
 # A content-specific URL prevents an earlier stylesheet from formatting new HTML.
 stylesheet = (DIST / 'site.css').read_bytes()
@@ -73,10 +82,8 @@ replacements = {
     '__AGENT_ROWS__': ''.join(rows),
     '__INITIAL_TABLE__': ''.join(table_rows),
     '__INITIAL_CHART_LABEL__': esc(' '.join(chart_label)),
-    '__HUMAN_PROMPT_OPTIONS__': ''.join(f'<option value="{key}">{key.upper()} · {esc(paper["prompts"][key]["name"])}</option>' for key in human_keys),
-    '__HUMAN_INITIAL_RATE__': human_initial_rate,
-    '__HUMAN_TABLE__': ''.join(human_table),
-    '__HUMAN_CHART_LABEL__': esc(human_chart_label),
+    '__HUMAN_ROWS__': ''.join(human_rows),
+    '__HUMAN_CHART_LABEL__': esc(' '.join(human_chart_label)),
     '__BASELINE_HEADING__': esc(paper['findings']['result1']['title']),
     '__POLICY_HEADING__': esc(paper['findings']['result4']['title']),
     '__FETCH_HEADING__': esc(paper['findings']['result7']['title']),
