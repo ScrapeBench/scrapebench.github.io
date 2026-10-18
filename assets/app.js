@@ -83,7 +83,7 @@ fetch('site-config.json').then(response => {
   }
 }).catch(() => {});
 
-// Play the request and HTML response once when the illustration is visible.
+// Loop the request and HTML response while the illustration is visible.
 const taskScene = $('.task-scene');
 const sceneMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let sceneVisible = false;
