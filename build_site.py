@@ -44,7 +44,7 @@ for key, model in data['models'].items():
     chart_label.append(f'{model["label"]}: {value}% compliance;')
 
 human_rows = []
-human_chart_label = ['Human Baseline.']
+human_chart_label = ['Human baseline.']
 for key in ('p1', 'p4', 'p7'):
     prompt_label = f'{key.upper()} · {paper["prompts"][key]["name"]}'
     bars = []
