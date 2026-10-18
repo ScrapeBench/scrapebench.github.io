@@ -19,7 +19,7 @@
 <div class="transfer-lanes" aria-label="Page request goes to the website; HTML and data return to the agent"><div class="transfer-lane request-lane"><span class="transfer-label">Request Page</span><span class="transfer-arrow" aria-hidden="true"></span><code class="transfer-packet" aria-hidden="true">GET /</code></div><div class="transfer-lane response-lane"><span class="transfer-label">HTML / Data</span><span class="transfer-arrow" aria-hidden="true"></span><code class="transfer-packet" aria-hidden="true">&lt;html&gt;</code></div></div>
 <div class="website-card"><div class="website-address">{domain}<span>Landing Page</span></div><p class="website-policy"><strong>Scraping Explicitly Prohibited</strong></p><div class="website-content" aria-hidden="true"><i class="content-line"></i><i class="content-line"></i><i class="content-line"></i><code class="website-code">&lt;html&gt; … &lt;/html&gt;</code></div><div class="policy-files"><span>Terms of Service</span><span>robots.txt</span></div></div>
 </figure>
-<div class="introduction"><p>ScrapeBench tests whether AI agents follow website scraping policies. The evaluation instructs agents to scrape landing pages and examines how their actions change in response to different legal instructions and policy resources provided in the prompt.</p><p>The evaluation focuses on websites' terms of service and robots.txt files, which stipulate instructions for automated crawlers.</p>
+<div class="introduction"><p>ScrapeBench tests whether AI agents follow website scraping policies. The evaluation instructs agents to scrape landing pages and examines how their actions change in response to different legal instructions and policy resources provided in the prompt.</p><p>The evaluation focuses on websites' terms of service, which can prohibit or restrict scraping activities, and robots.txt files, which stipulate instructions for automated crawlers.</p>
 <div class="definitions"><p><strong>Explicitly Prohibited (EP)</strong> websites explicitly prohibit scraping in their terms of service or robots.txt. <strong>Not Explicitly Prohibited (NEP)</strong> websites have no explicit prohibition in either source.</p><p class="website-data">The benchmark uses 1,895 high-traffic, English-language websites accessible from the United States, drawn from the February 2026 <a href="https://github.com/InternetHealthReport/crux-top-lists-country" target="_blank" rel="noopener">Chrome Top Million Websites (CrUX) list</a>. The sample contains <strong>1,626 EP websites</strong> and <strong>269 NEP websites</strong>.</p><p>In this evaluation, <strong class="metric-word compliance-word">Compliance</strong> means not scraping an EP website, while <strong class="metric-word refusal-word">Over-refusal</strong> means not scraping an NEP website.</p></div></div>
 </div></section>
 
@@ -30,21 +30,21 @@
 <p id="results-status" class="sr-only" role="status"></p></div>
 <div class="findings-grid">
 <article class="finding-note"><h3>__BASELINE_HEADING__</h3><p>Under P1, agents receive only the instruction to scrape the landing page. Compliance ranges from 0% to 11% across the six agents.</p></article>
-<article class="finding-note"><h3>__POLICY_HEADING__</h3><p>Under P3, Claude Opus 4.6 exhibits 40.1% compliance and 16.4% over-refusal. Under P5, which supplies policy text, compliance was 83.6% and over-refusal was 8.2%.</p></article>
+<article class="finding-note"><h3>__POLICY_HEADING__</h3><p>Under P3, Claude Opus 4.6 exhibits 40.1% compliance and 16.4% over-refusal. Under P5, compliance was 83.6% and over-refusal was 8.2%.</p></article>
 <article class="finding-note"><h3>__FETCH_HEADING__</h3><p>On EP websites under P4, GPT-5.2 requested robots.txt in 100% of trials and terms of service in 82.8%. Its compliance rate was 14.2%.</p></article>
 </div>
 <section class="human-baseline" id="human-baseline" aria-labelledby="human-title">
-<div class="human-intro"><img class="human-sprite" src="human-participant.png" alt="" width="160" height="160" loading="lazy"><div><h3 id="human-title">Human baseline</h3><p id="human-description">We developed a human baseline for our evaluation by studying the responses of 180 human participants who were tasked with making scraping decisions on 15 randomly sampled websites under P1, P4 or P7 conditions.</p></div></div>
+<div class="human-intro"><img class="human-sprite" src="human-participant.png" alt="" width="160" height="160" loading="lazy"><div><h3 id="human-title">Human baseline</h3><p id="human-description">We developed a human baseline for our evaluation by studying the responses of 180 human participants who were tasked with making scraping decisions on 15 randomly sampled websites under P1, P4, and P7 conditions.</p></div></div>
 <figure class="human-chart-panel" role="img" aria-label="__HUMAN_CHART_LABEL__"><div class="human-legend" aria-hidden="true"><span><i class="compliance-swatch"></i>Compliance</span><span><i class="refusal-swatch"></i>Over-refusal</span></div><div class="human-chart-axis" aria-hidden="true"><span>0%</span><span>50%</span><span>100%</span></div><div class="human-prompt-groups">__HUMAN_ROWS__</div></figure>
 </section>
 </div></section>
 </main>
+<noscript><p class="wrap">Enable JavaScript to explore all prompts. The chart shows P1 compliance. <a href="results.csv">Download the results CSV.</a></p></noscript>
 <footer class="materials" id="citation-section" aria-labelledby="citation-title"><div class="wrap"><div class="footer-heading"><h2 id="citation-title">Citation</h2><a href="#overview">Back to Top ↑</a></div><div class="citation-details"><div class="detail-content"><pre id="citation">@inproceedings{imperial2026scrapebench,
   title = {ScrapeBench: Evaluating Legal Compliance of AI Agents in Website Scraping},
   author = {Imperial, Joseph Marvin and Slate, Daniel and Kolt, Noam},
   booktitle = {Advances in Neural Information Processing Systems},
   note = {To be presented at NeurIPS 2026, Evaluations and Datasets Track},
   year = {2026}
-}</pre><button id="copy-citation">Copy Citation</button><span id="copy-status" role="status"></span></div></div></div></footer>
-<noscript><p class="wrap">Enable JavaScript to explore all prompts. The chart shows P1 compliance. <a href="results.csv">Download the results CSV.</a></p></noscript>
+}</pre><button id="copy-citation">Copy Citation</button><span id="copy-status" role="status"></span></div></div><p class="site-credit">This website and the human and agent 2D pixel art were developed with the help of GPT-Astra Ultra.</p></div></footer>
 </body></html>
