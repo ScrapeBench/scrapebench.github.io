@@ -62,19 +62,20 @@ h1{font-size:var(--h1);line-height:1.06;letter-spacing:-.055em}h2{font-size:var(
 .website-code{display:block;margin-top:2px;color:var(--plum);font:400 16px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:nowrap}
 .policy-files{display:flex;gap:10px;flex-wrap:wrap;padding:0 17px 16px;color:var(--ink);font-size:var(--small);line-height:1.45}
 .policy-files span{padding:5px 9px;border:1px solid #d9cedd;background:#f3edf4;border-radius:3px}
-.task-scene.is-playing .incoming .task-packet{animation:prompt-delivery 4.8s linear infinite}
-.task-scene.is-playing .request-lane .transfer-packet{animation:page-request 4.8s linear infinite}
-.task-scene.is-playing .response-lane .transfer-packet{animation:html-response 4.8s linear infinite}
-.task-scene.is-playing .website-content{animation:website-read 4.8s linear infinite}
-.task-scene.is-playing .agent-receipt{animation:html-received 4.8s linear infinite}
-.task-scene.is-playing .scene-agent img{animation:agent-read 4.8s linear infinite}
+.task-scene.is-playing .incoming .task-packet{animation:prompt-delivery 6s linear infinite}
+.task-scene.is-playing .request-lane .transfer-packet{animation:page-request 6s linear infinite}
+.task-scene.is-playing .response-lane .transfer-packet{animation:html-response 6s linear infinite}
+.task-scene.is-playing .website-content{animation:website-read 6s linear infinite}
+.task-scene.is-playing .agent-receipt{animation:html-received 6s linear infinite}
+.task-scene.is-playing .scene-agent img{animation:agent-read 6s linear infinite}
 .task-scene.is-paused *,.task-scene.is-paused *::before,.task-scene.is-paused *::after{animation-play-state:paused!important}
-@keyframes prompt-delivery{0%{left:0;opacity:0}2%{left:0;opacity:1}14%{left:calc(100% - 4px);opacity:1}15%,100%{left:calc(100% - 4px);opacity:0}}
-@keyframes page-request{0%,14%{left:var(--packet-start-left);top:var(--packet-start-top);opacity:0}15%{left:var(--packet-start-left);top:var(--packet-start-top);opacity:1}34%{left:var(--packet-end-left);top:var(--packet-end-top);opacity:1}35%,100%{left:var(--packet-end-left);top:var(--packet-end-top);opacity:0}}
-@keyframes html-response{0%,44%{left:var(--packet-start-left);top:var(--packet-start-top);opacity:0}45%{left:var(--packet-start-left);top:var(--packet-start-top);opacity:1}69%{left:var(--packet-end-left);top:var(--packet-end-top);opacity:1}70%,100%{left:var(--packet-end-left);top:var(--packet-end-top);opacity:0}}
-@keyframes website-read{0%,34%,46%,100%{background:transparent}36%,44%{background:var(--plum-light)}}
-@keyframes html-received{0%,69%{opacity:0}72%,95%{opacity:1}100%{opacity:0}}
-@keyframes agent-read{0%,14%,36%,69%,100%{transform:none}22%,30%{transform:translateY(-3px) rotate(2deg)}73%,81%{transform:translateY(-3px) rotate(-2deg)}88%{transform:none}}
+/* Each six-second cycle shows scraping for three seconds, then holds the receipt for three. */
+@keyframes prompt-delivery{0%{left:0;opacity:1}10%{left:calc(100% - 4px);opacity:1}10.01%,100%{left:calc(100% - 4px);opacity:0}}
+@keyframes page-request{0%,9.99%{left:var(--packet-start-left);top:var(--packet-start-top);opacity:0}10%{left:var(--packet-start-left);top:var(--packet-start-top);opacity:1}28%{left:var(--packet-end-left);top:var(--packet-end-top);opacity:1}28.01%,100%{left:var(--packet-end-left);top:var(--packet-end-top);opacity:0}}
+@keyframes html-response{0%,34.99%{left:var(--packet-start-left);top:var(--packet-start-top);opacity:0}35%{left:var(--packet-start-left);top:var(--packet-start-top);opacity:1}49.99%{left:var(--packet-end-left);top:var(--packet-end-top);opacity:1}50%,100%{left:var(--packet-end-left);top:var(--packet-end-top);opacity:0}}
+@keyframes website-read{0%,28%,37%,100%{background:transparent}30%,35%{background:var(--plum-light)}}
+@keyframes html-received{0%,49.99%{opacity:0}50%,100%{opacity:1}}
+@keyframes agent-read{0%,10%,28%,49%,100%{transform:none}16%,24%{transform:translateY(-3px) rotate(2deg)}}
 .introduction{max-width:840px;margin:37px auto 0}.introduction>p+p{margin-top:17px}
 .definitions{margin-top:27px;padding-top:26px;border-top:1px solid var(--line)}.definitions p+p{margin-top:16px}
 .keep-together{white-space:nowrap}

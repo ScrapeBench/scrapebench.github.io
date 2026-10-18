@@ -83,20 +83,14 @@ fetch('site-config.json').then(response => {
   }
 }).catch(() => {});
 
-// Loop the request and HTML response while the illustration is visible.
+// Keep looping while the page is active, including when only part of the scene is visible.
 const taskScene = $('.task-scene');
 const sceneMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-let sceneVisible = false;
 
 function syncScenePlayback() {
-  taskScene.classList.toggle('is-paused', !sceneVisible || document.hidden || sceneMotion.matches);
+  taskScene.classList.toggle('is-paused', document.hidden || sceneMotion.matches);
 }
 
-const sceneObserver = new IntersectionObserver(entries => {
-  sceneVisible = entries.some(entry => entry.intersectionRatio >= .35);
-  syncScenePlayback();
-}, {threshold:[0,.35]});
-sceneObserver.observe(taskScene);
 document.addEventListener('visibilitychange', syncScenePlayback);
 sceneMotion.addEventListener('change', syncScenePlayback);
 syncScenePlayback();
