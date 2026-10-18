@@ -29,7 +29,6 @@ def rate(value):
     return str(Decimal(str(value)).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP))
 
 rows = []
-table_rows = []
 chart_label = ['P1 · Neutral (Baseline).']
 for key, model in data['models'].items():
     baseline = model['prompts']['p1']
@@ -42,9 +41,6 @@ for key, model in data['models'].items():
         f'<div class="agent-track" aria-hidden="true"><div class="agent-fill" style="width:{value}%"></div></div>'
         f'<strong class="agent-value">{value}<small>%</small></strong></div>'
     )
-    table_rows.append(f'<tr><th scope="row">{esc(model["label"])}</th>'
-                      f'<td data-label="Compliance">{value}%</td>'
-                      f'<td data-label="Over-refusal">{rate(baseline["overrefusal"]["rate"])}%</td></tr>')
     chart_label.append(f'{model["label"]}: {value}% compliance;')
 
 human_rows = []
@@ -80,7 +76,6 @@ replacements = {
     '__SCRIPT_URL__': script_name,
     '__PROMPT_OPTIONS__': ''.join(f'<option value="{key}">{key.upper()} · {esc(item["name"])}</option>' for key, item in paper['prompts'].items()),
     '__AGENT_ROWS__': ''.join(rows),
-    '__INITIAL_TABLE__': ''.join(table_rows),
     '__INITIAL_CHART_LABEL__': esc(' '.join(chart_label)),
     '__HUMAN_ROWS__': ''.join(human_rows),
     '__HUMAN_CHART_LABEL__': esc(' '.join(human_chart_label)),

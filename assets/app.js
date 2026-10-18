@@ -1,7 +1,6 @@
 'use strict';
 const $ = selector => document.querySelector(selector);
 const $$ = selector => [...document.querySelectorAll(selector)];
-const escapeHTML = value => String(value).replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
 const percent = value => Number(value).toFixed(1);
 const promptKeys = ['p1','p2','p3','p4','p5','p6','p7','p8'];
 let results, paper;
@@ -25,7 +24,6 @@ function updateChart(announce = true) {
     row.querySelector('.agent-fill').style.width = rate + '%';
     row.querySelector('.agent-value').innerHTML = percent(rate) + '<small>%</small>';
   });
-  $('#results-table').innerHTML = Object.values(results.models).map(model => '<tr><th scope="row">' + escapeHTML(model.label) + '</th><td data-label="Compliance">' + percent(model.prompts[prompt].compliance.rate) + '%</td><td data-label="Over-refusal">' + percent(model.prompts[prompt].overrefusal.rate) + '%</td></tr>').join('');
   const url = new URL(location.href);
   url.searchParams.delete('design');
   if (prompt === 'p1') url.searchParams.delete('prompt'); else url.searchParams.set('prompt', prompt);
@@ -85,73 +83,21 @@ fetch('site-config.json').then(response => {
   }
 }).catch(() => {});
 
-
-
-// Indicate the current section while reading.
-const chapters = $$('main > section[id], footer[id]');
-const chapterLinks = $$('.section-nav a[data-section]');
-let navigationFrame;
-function updateReadingPosition() {
-  navigationFrame = null;
-  const marker = $('.topbar').getBoundingClientRect().height + 90;
-  let current = chapters[0].id;
-  chapters.forEach(chapter => { if (chapter.getBoundingClientRect().top <= marker) current = chapter.id; });
-  if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) current = chapters[chapters.length - 1].id;
-  chapterLinks.forEach(link => {
-    if (link.dataset.section === current) link.setAttribute('aria-current', 'location');
-    else link.removeAttribute('aria-current');
-  });
-}
-window.addEventListener('scroll', () => { if (!navigationFrame) navigationFrame = requestAnimationFrame(updateReadingPosition); }, {passive:true});
-window.addEventListener('resize', updateReadingPosition);
-updateReadingPosition();
-
-// Findings select the corresponding measured result in the same explorer.
-$$('.finding-jump').forEach(button => button.addEventListener('click', () => {
-  $('#prompt').value = button.dataset.prompt;
-  selectedMetric = 'compliance';
-  updateChart();
-  $('#prompt').focus({preventScroll:true});
-  $('#results').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
-}));
-
-// Illustrate the content request and HTML response, separate from measured trials.
+// Play the request and HTML response once when the illustration is visible.
 const taskScene = $('.task-scene');
-const replayTask = $('#replay-task');
-const toggleTask = $('#toggle-task');
 const sceneMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let sceneVisible = false;
-let scenePaused = false;
 
 function syncScenePlayback() {
-  taskScene.classList.toggle('is-paused', scenePaused || !sceneVisible || document.hidden || sceneMotion.matches);
-  toggleTask.textContent = scenePaused ? 'Play' : 'Pause';
-  toggleTask.setAttribute('aria-label', scenePaused ? 'Play Scraping Animation' : 'Pause Scraping Animation');
+  taskScene.classList.toggle('is-paused', !sceneVisible || document.hidden || sceneMotion.matches);
 }
 
-function playTaskScene(announce = false, resume = true) {
-  if (sceneMotion.matches) return;
-  if (resume) scenePaused = false;
-  taskScene.classList.remove('is-playing');
-  void taskScene.offsetWidth;
-  taskScene.classList.add('is-playing');
-  syncScenePlayback();
-  if (announce) $('#scene-status').textContent = 'Scraping illustration restarted.';
-}
-replayTask.addEventListener('click', () => playTaskScene(true));
-toggleTask.addEventListener('click', () => {
-  scenePaused = !scenePaused;
-  syncScenePlayback();
-  $('#scene-status').textContent = scenePaused ? 'Scraping animation paused.' : 'Scraping animation playing.';
-});
 const sceneObserver = new IntersectionObserver(entries => {
   sceneVisible = entries.some(entry => entry.intersectionRatio >= .35);
   syncScenePlayback();
 }, {threshold:[0,.35]});
 sceneObserver.observe(taskScene);
 document.addEventListener('visibilitychange', syncScenePlayback);
-sceneMotion.addEventListener('change', () => {
-  if (sceneMotion.matches) syncScenePlayback();
-  else playTaskScene(false, false);
-});
-playTaskScene();
+sceneMotion.addEventListener('change', syncScenePlayback);
+syncScenePlayback();
+taskScene.classList.add('is-playing');
