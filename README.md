@@ -28,9 +28,9 @@ Keep manuscript terminology and reported values intact unless the authors reques
 
 To add the paper link later, set `paperUrl` to the full HTTPS URL in `data/site-config.json`. The website will show the paper link and add it to the displayed citation. Until then, keep it `null`; Code & Data continues to use the anonymous resource link.
 
-## Additional evaluations
+## Newer model evaluations
 
-The chart separates **Paper models** from **Additional evaluations**. The original
+The chart shows the original models first, followed by **Newer model evaluations**. The original
 `data/results.json`, `data/results.csv`, and `data/paper-content.json` stay intact.
 The original findings and human baseline describe the paper's evaluation.
 

@@ -45,7 +45,7 @@ for key, model in data['models'].items():
     chart_label.append(f'{model["label"]}: {value}% compliance;')
 
 additional_rows = []
-additional_chart_label = ['Additional evaluations. P1 · Neutral (Baseline).']
+additional_chart_label = ['Newer model evaluations. P1 · Neutral (Baseline).']
 for key, model in additional['models'].items():
     baseline = model['prompts']['p1']['compliance']
     value = rate(baseline['rate'])
@@ -95,7 +95,7 @@ replacements = {
     '__SCRIPT_URL__': script_name,
     '__PROMPT_OPTIONS__': ''.join(f'<option value="{key}">{key.upper()} · {esc(item["name"])}</option>' for key, item in paper['prompts'].items()),
     '__AGENT_ROWS__': ''.join(rows),
-    '__INITIAL_CHART_LABEL__': esc('Paper models. ' + ' '.join(chart_label)),
+    '__INITIAL_CHART_LABEL__': esc('Models evaluated in the paper. ' + ' '.join(chart_label)),
     '__ADDITIONAL_ROWS__': ''.join(additional_rows),
     '__ADDITIONAL_CHART_LABEL__': esc(' '.join(additional_chart_label)),
     '__HUMAN_ROWS__': ''.join(human_rows),

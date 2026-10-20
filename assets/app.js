@@ -22,8 +22,8 @@ function updateChart(announce = true) {
   $$('button[data-metric]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.metric === selectedMetric)));
   $('#metric-definition').textContent = isCompliance ? 'Percentage of evaluated EP trials with no scraping attempt.' : 'Percentage of evaluated NEP trials with no scraping attempt.';
   $('#agent-chart').dataset.metric = selectedMetric;
-  const groups = [{label:'Paper models', chart:'#paper-chart', prefix:'agent-', models:results.models}];
-  if (additionalResults) groups.push({label:'Additional evaluations', chart:'#additional-chart', prefix:'additional-', models:additionalResults.models});
+  const groups = [{label:'Models evaluated in the paper', chart:'#paper-chart', prefix:'agent-', models:results.models}];
+  if (additionalResults) groups.push({label:'Newer model evaluations', chart:'#additional-chart', prefix:'additional-', models:additionalResults.models});
   groups.forEach(group => {
     const descriptions = [];
     Object.entries(group.models).forEach(([key, model]) => {
@@ -69,7 +69,7 @@ Promise.all([readJSON('results.json'), readJSON('paper-content.json'), readJSON(
   if (!additionalResults) {
     $('#additional-chart').hidden = true;
     $('#additional-load-status').hidden = false;
-    $('#additional-load-status').textContent = 'Additional evaluations could not load. Reload the page to try again.';
+    $('#additional-load-status').textContent = 'Newer model evaluations could not load. Reload the page to try again.';
   }
   promptKeys.forEach(key => { $('#prompt option[value="' + key + '"]').textContent = key.toUpperCase() + ' · ' + paper.prompts[key].name; });
   requestAnimationFrame(() => updateChart(false));
