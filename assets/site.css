@@ -90,7 +90,8 @@ h1{font-size:var(--h1);line-height:1.06;letter-spacing:-.055em}h2{font-size:var(
 .results-controls{min-width:0;padding-right:29px;border-right:1px solid var(--line)}
 .prompt-control label,.results-controls>label{display:block;margin-bottom:11px;color:var(--ink);font-size:var(--small);font-weight:600}
 select{display:block;width:100%;min-height:56px;padding:12px 34px 12px 13px;border:1px solid #bcafc2;border-radius:4px;background:#fffdf9;font-size:var(--small);line-height:1.45}
-.metric-picker{display:flex;flex-wrap:wrap;gap:9px;margin-top:23px}.metric-picker button{min-height:46px;padding:9px 12px;border:1px solid transparent;border-radius:4px;font-size:var(--small);font-weight:500;line-height:1.45}
+.metric-picker{display:flex;flex-wrap:wrap;gap:9px;margin-top:23px}.metric-picker button{flex:1 1 140px;min-height:46px;padding:9px 12px;border:1px solid transparent;border-radius:4px;font-size:var(--small);font-weight:500;line-height:1.45}
+.metric-direction{display:block;margin-top:3px;font-size:15px;font-weight:400;line-height:1.35;white-space:nowrap}
 .metric-picker button[data-metric=compliance]{background:#e8f3e5;color:var(--compliance-ink)}.metric-picker button[data-metric=overrefusal]{background:#fce6dc;color:var(--refusal-ink)}
 .metric-picker button[data-metric=compliance][aria-pressed=true]{background:var(--compliance);border-color:var(--compliance-ink);box-shadow:inset 0 0 0 1px var(--compliance-ink)}
 .metric-picker button[data-metric=overrefusal][aria-pressed=true]{background:var(--refusal);border-color:var(--refusal-ink);box-shadow:inset 0 0 0 1px var(--refusal-ink)}
@@ -179,7 +180,7 @@ pre{max-width:100%;margin:2px 0 20px;padding:20px 22px;border:1px solid var(--li
   :root{--h1:50px;--h2:32px;--h3:23px}.wrap{width:calc(100% - 40px)}
   .overview{padding-top:34px}.conference{margin-bottom:18px;line-height:1.65}.paper-title{margin-top:17px;font-size:25px;line-height:1.4}.authors{margin-top:20px}.hero-links{gap:15px 21px;margin-top:24px}.hero-links #paper-link{flex-basis:100%}
   .task-card{padding:18px}.task-card blockquote{font-size:21px}.definitions{padding-top:22px}
-  .results-panel{gap:23px;padding:22px 19px}select{font-size:17px}.metric-picker{gap:8px}.metric-picker button{flex:1 1 auto;padding-inline:10px;font-size:17px}.metric-definition,.chart-group-description{font-size:17px}.chart-axis{margin:21px 0 8px}
+  .results-panel{gap:23px;padding:22px 19px}select{font-size:17px}.metric-picker{gap:8px}.metric-picker button{padding-inline:10px;font-size:17px}.metric-definition,.chart-group-description{font-size:17px}.chart-axis{margin:21px 0 8px}
   .agent-row{grid-template-columns:minmax(0,1fr) auto;gap:11px 15px;min-height:0;padding:15px 0}.agent-name{grid-column:1;grid-row:1;font-size:17px}.agent-value{grid-column:2;grid-row:1;font-size:23px}.agent-track{grid-column:1/-1;grid-row:2;height:15px}.agent-row:last-child{padding-bottom:0}
   .paper-findings-label{margin-top:34px}.findings-grid{margin-top:18px}.finding-note p{font-size:var(--body)}.section-heading{margin-bottom:27px}.materials{padding-block:46px}pre{padding:16px}
   .human-baseline{margin-top:35px;padding:24px 19px}.human-intro{grid-template-columns:90px minmax(0,1fr);gap:15px 18px}.human-intro>div{display:contents}.human-sprite{grid-column:1;grid-row:1;width:90px;height:90px}.human-intro h3{grid-column:2;grid-row:1;align-self:center}.human-intro p{grid-column:1/-1;margin-top:0}
