@@ -40,7 +40,7 @@ in the evaluated CSVs, divided by the number of evaluated websites. The import
 checks agreement with `Outcome`, unique domains, and complete coverage of the
 approved EP and NEP lists. It does not rerun experiments, modify research inputs,
 or publish individual website logs. Runtime settings and prompt wording can differ
-from the paper's runs. The explorer shows both prompt texts when they differ.
+from the paper's runs. The explorer displays the paper prompt for each condition.
 
 To regenerate the additional aggregate data from a local research checkout:
 

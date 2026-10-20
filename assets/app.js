@@ -14,11 +14,6 @@ function updateChart(announce = true) {
   const prompt = $('#prompt').value;
   const isCompliance = selectedMetric === 'compliance';
   $('#prompt-text').textContent = '"' + paper.prompts[prompt].text + '"';
-  const additionalPrompt = additionalResults?.prompts[prompt]?.text;
-  const separatePrompt = additionalPrompt && additionalPrompt !== paper.prompts[prompt].text;
-  $('#additional-prompt-details').hidden = !separatePrompt;
-  $('#paper-prompt-label').hidden = !separatePrompt;
-  if (separatePrompt) $('#additional-prompt-text').textContent = '"' + additionalPrompt + '"';
   $$('button[data-metric]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.metric === selectedMetric)));
   $('#metric-definition').textContent = isCompliance ? 'Percentage of evaluated EP trials with no scraping attempt.' : 'Percentage of evaluated NEP trials with no scraping attempt.';
   $('#agent-chart').dataset.metric = selectedMetric;
