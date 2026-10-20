@@ -68,7 +68,8 @@ Promise.all([readJSON('results.json'), readJSON('paper-content.json'), readJSON(
   additionalResults = additional;
   if (!additionalResults) {
     $('#additional-chart').hidden = true;
-    $('#additional-coverage').textContent = 'Additional evaluations could not load. Reload the page to try again.';
+    $('#additional-load-status').hidden = false;
+    $('#additional-load-status').textContent = 'Additional evaluations could not load. Reload the page to try again.';
   }
   promptKeys.forEach(key => { $('#prompt option[value="' + key + '"]').textContent = key.toUpperCase() + ' · ' + paper.prompts[key].name; });
   requestAnimationFrame(() => updateChart(false));

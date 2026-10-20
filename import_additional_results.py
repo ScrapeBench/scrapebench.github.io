@@ -16,9 +16,9 @@ ROOT = Path(__file__).resolve().parent
 MODELS = {
     "gpt56sol": {"label": "GPT-5.6 Sol", "modelId": "openai/gpt-5.6-sol", "logo": "gpt_logo.png"},
     "claudeopus55": {"label": "Claude Opus 5.5", "modelId": "anthropic/claude-opus-5.5", "logo": "claude_logo.png"},
-    "musespark13": {"label": "Muse Spark 1.3", "modelId": "meta/muse-spark-1.3"},
-    "glm53": {"label": "GLM 5.3", "modelId": "z-ai/glm-5.3"},
-    "mistralmedium35": {"label": "Mistral Medium 3.5", "modelId": "mistralai/mistral-medium-3-5"},
+    "musespark13": {"label": "Muse Spark 1.3", "modelId": "meta/muse-spark-1.3", "logo": "meta-color.png"},
+    "glm53": {"label": "GLM 5.3", "modelId": "z-ai/glm-5.3", "logo": "zai.png"},
+    "mistralmedium35": {"label": "Mistral Medium 3.5", "modelId": "mistralai/mistral-medium-3-5", "logo": "mistral-color.png"},
 }
 PROMPTS = [f"p{i}" for i in range(1, 9)]
 
