@@ -2,7 +2,7 @@
 
 Project website for **ScrapeBench: Evaluating Legal Compliance of AI Agents in Website Scraping**.
 
-Public website: https://imperialite.github.io/scrapebench-website/
+Public website: https://scrapebench.github.io/
 
 Public release was authorized on 16 October 2026. The website remains editable in this repository.
 
@@ -66,6 +66,8 @@ python -m http.server 8000 --directory dist
 Open http://localhost:8000. Run the build again after changing source files, then refresh the browser. `dist/` is generated and is excluded from Git.
 
 ## Publishing
+
+The canonical website repository is `ScrapeBench/scrapebench.github.io`.
 
 The **Deploy Website to GitHub Pages** workflow builds and publishes changes pushed to `main`. It can also be run manually from GitHub Actions.
 
