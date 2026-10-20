@@ -1,0 +1,81 @@
+evaluation_group,model,prompt,metric,no_scrape_count,evaluated_websites,rate_percent
+Additional evaluations,GPT-5.6 Sol,P1,compliance,0,1626,0.0
+Additional evaluations,Claude Opus 5.5,P1,compliance,1,1626,0.06150061500615006
+Additional evaluations,Muse Spark 1.3,P1,compliance,0,1626,0.0
+Additional evaluations,GLM 5.3,P1,compliance,0,1626,0.0
+Additional evaluations,Mistral Medium 3.5,P1,compliance,1,1626,0.06150061500615006
+Additional evaluations,GPT-5.6 Sol,P2,compliance,7,1626,0.43050430504305043
+Additional evaluations,Claude Opus 5.5,P2,compliance,125,1626,7.687576875768758
+Additional evaluations,Muse Spark 1.3,P2,compliance,76,1626,4.674046740467404
+Additional evaluations,GLM 5.3,P2,compliance,0,1626,0.0
+Additional evaluations,Mistral Medium 3.5,P2,compliance,869,1626,53.4440344403444
+Additional evaluations,GPT-5.6 Sol,P3,compliance,575,1626,35.362853628536286
+Additional evaluations,Claude Opus 5.5,P3,compliance,720,1626,44.28044280442804
+Additional evaluations,Muse Spark 1.3,P3,compliance,286,1626,17.589175891758916
+Additional evaluations,GLM 5.3,P3,compliance,148,1626,9.10209102091021
+Additional evaluations,Mistral Medium 3.5,P3,compliance,665,1626,40.89790897908979
+Additional evaluations,GPT-5.6 Sol,P4,compliance,478,1626,29.397293972939732
+Additional evaluations,Claude Opus 5.5,P4,compliance,569,1626,34.99384993849938
+Additional evaluations,Muse Spark 1.3,P4,compliance,616,1626,37.88437884378843
+Additional evaluations,GLM 5.3,P4,compliance,209,1626,12.853628536285363
+Additional evaluations,Mistral Medium 3.5,P4,compliance,419,1626,25.768757687576876
+Additional evaluations,GPT-5.6 Sol,P5,compliance,1163,1626,71.52521525215252
+Additional evaluations,Claude Opus 5.5,P5,compliance,931,1626,57.25707257072571
+Additional evaluations,Muse Spark 1.3,P5,compliance,1314,1626,80.81180811808119
+Additional evaluations,GLM 5.3,P5,compliance,596,1626,36.65436654366543
+Additional evaluations,Mistral Medium 3.5,P5,compliance,1331,1626,81.85731857318574
+Additional evaluations,GPT-5.6 Sol,P6,compliance,1160,1626,71.34071340713407
+Additional evaluations,Claude Opus 5.5,P6,compliance,1041,1626,64.02214022140221
+Additional evaluations,Muse Spark 1.3,P6,compliance,1242,1626,76.38376383763837
+Additional evaluations,GLM 5.3,P6,compliance,745,1626,45.817958179581794
+Additional evaluations,Mistral Medium 3.5,P6,compliance,1335,1626,82.10332103321034
+Additional evaluations,GPT-5.6 Sol,P7,compliance,1214,1626,74.66174661746618
+Additional evaluations,Claude Opus 5.5,P7,compliance,1029,1626,63.284132841328415
+Additional evaluations,Muse Spark 1.3,P7,compliance,1400,1626,86.10086100861008
+Additional evaluations,GLM 5.3,P7,compliance,784,1626,48.21648216482165
+Additional evaluations,Mistral Medium 3.5,P7,compliance,1516,1626,93.2349323493235
+Additional evaluations,GPT-5.6 Sol,P8,compliance,79,1626,4.858548585485855
+Additional evaluations,Claude Opus 5.5,P8,compliance,0,1626,0.0
+Additional evaluations,Muse Spark 1.3,P8,compliance,945,1626,58.11808118081181
+Additional evaluations,GLM 5.3,P8,compliance,86,1626,5.289052890528905
+Additional evaluations,Mistral Medium 3.5,P8,compliance,125,1626,7.687576875768758
+Additional evaluations,GPT-5.6 Sol,P1,overrefusal,0,269,0.0
+Additional evaluations,Claude Opus 5.5,P1,overrefusal,0,269,0.0
+Additional evaluations,Muse Spark 1.3,P1,overrefusal,0,269,0.0
+Additional evaluations,GLM 5.3,P1,overrefusal,0,269,0.0
+Additional evaluations,Mistral Medium 3.5,P1,overrefusal,0,269,0.0
+Additional evaluations,GPT-5.6 Sol,P2,overrefusal,0,269,0.0
+Additional evaluations,Claude Opus 5.5,P2,overrefusal,1,269,0.37174721189591076
+Additional evaluations,Muse Spark 1.3,P2,overrefusal,0,269,0.0
+Additional evaluations,GLM 5.3,P2,overrefusal,0,269,0.0
+Additional evaluations,Mistral Medium 3.5,P2,overrefusal,88,269,32.71375464684015
+Additional evaluations,GPT-5.6 Sol,P3,overrefusal,47,269,17.472118959107807
+Additional evaluations,Claude Opus 5.5,P3,overrefusal,66,269,24.53531598513011
+Additional evaluations,Muse Spark 1.3,P3,overrefusal,10,269,3.717472118959108
+Additional evaluations,GLM 5.3,P3,overrefusal,4,269,1.486988847583643
+Additional evaluations,Mistral Medium 3.5,P3,overrefusal,71,269,26.394052044609666
+Additional evaluations,GPT-5.6 Sol,P4,overrefusal,10,269,3.717472118959108
+Additional evaluations,Claude Opus 5.5,P4,overrefusal,53,269,19.702602230483272
+Additional evaluations,Muse Spark 1.3,P4,overrefusal,21,269,7.806691449814126
+Additional evaluations,GLM 5.3,P4,overrefusal,8,269,2.973977695167286
+Additional evaluations,Mistral Medium 3.5,P4,overrefusal,33,269,12.267657992565056
+Additional evaluations,GPT-5.6 Sol,P5,overrefusal,2,269,0.7434944237918215
+Additional evaluations,Claude Opus 5.5,P5,overrefusal,2,269,0.7434944237918215
+Additional evaluations,Muse Spark 1.3,P5,overrefusal,5,269,1.858736059479554
+Additional evaluations,GLM 5.3,P5,overrefusal,2,269,0.7434944237918215
+Additional evaluations,Mistral Medium 3.5,P5,overrefusal,13,269,4.83271375464684
+Additional evaluations,GPT-5.6 Sol,P6,overrefusal,4,269,1.486988847583643
+Additional evaluations,Claude Opus 5.5,P6,overrefusal,2,269,0.7434944237918215
+Additional evaluations,Muse Spark 1.3,P6,overrefusal,6,269,2.2304832713754648
+Additional evaluations,GLM 5.3,P6,overrefusal,2,269,0.7434944237918215
+Additional evaluations,Mistral Medium 3.5,P6,overrefusal,11,269,4.089219330855019
+Additional evaluations,GPT-5.6 Sol,P7,overrefusal,7,269,2.6022304832713754
+Additional evaluations,Claude Opus 5.5,P7,overrefusal,7,269,2.6022304832713754
+Additional evaluations,Muse Spark 1.3,P7,overrefusal,29,269,10.780669144981413
+Additional evaluations,GLM 5.3,P7,overrefusal,3,269,1.1152416356877324
+Additional evaluations,Mistral Medium 3.5,P7,overrefusal,66,269,24.53531598513011
+Additional evaluations,GPT-5.6 Sol,P8,overrefusal,1,269,0.37174721189591076
+Additional evaluations,Claude Opus 5.5,P8,overrefusal,0,269,0.0
+Additional evaluations,Muse Spark 1.3,P8,overrefusal,90,269,33.457249070631974
+Additional evaluations,GLM 5.3,P8,overrefusal,10,269,3.717472118959108
+Additional evaluations,Mistral Medium 3.5,P8,overrefusal,15,269,5.5762081784386615

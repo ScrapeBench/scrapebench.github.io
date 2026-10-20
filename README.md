@@ -16,7 +16,10 @@ This repository is independent of the paper repository. It contains the website 
 | `assets/site.css` | Colors, typography, spacing, and responsive layout |
 | `assets/app.js` | Interactive charts, animation, and copy controls |
 | `data/paper-content.json` | Exact prompt wording and paper excerpts used by the page |
-| `data/results.json` | Agent and human chart values |
+| `data/results.json` | Frozen paper-model and human chart values |
+| `data/additional-results.json` | Additional model rates, exact prompt templates, counts and source hashes |
+| `data/additional-results.csv` | Downloadable additional evaluation rates |
+| `import_additional_results.py` | Read-only import of additional experiment CSVs into aggregate website data |
 | `data/results.csv` | Downloadable results; keep consistent with the chart data |
 | `data/site-config.json` | Public paper link and Code & Data destination |
 | `assets/` | Agent and human sprites and model logos |
@@ -24,6 +27,32 @@ This repository is independent of the paper repository. It contains the website 
 Keep manuscript terminology and reported values intact unless the authors request a correction.
 
 To add the paper link later, set `paperUrl` to the full HTTPS URL in `data/site-config.json`. The website will show the paper link and add it to the displayed citation. Until then, keep it `null`; Code & Data continues to use the anonymous resource link.
+
+## Additional evaluations
+
+The chart separates **Paper models** from **Additional evaluations**. The original
+`data/results.json`, `data/results.csv`, and `data/paper-content.json` stay intact.
+The original findings and human baseline describe the paper's evaluation.
+
+Five additional models were added on 20 October 2026. Each has P1–P8 results for
+1,626 EP websites and 269 NEP websites. Additional rates count `Attempted Scrape = no`
+in the evaluated CSVs, divided by the number of evaluated websites. The import
+checks agreement with `Outcome`, unique domains, and complete coverage of the
+approved EP and NEP lists. It does not rerun experiments, modify research inputs,
+or publish individual website logs. Runtime settings and prompt wording can differ
+from the paper's runs. The explorer shows both prompt texts when they differ.
+
+To regenerate the additional aggregate data from a local research checkout:
+
+```sh
+python import_additional_results.py --source-root /path/to/tos_contract --added-on 2026-10-20
+python build_site.py
+```
+
+The importer records source SHA-256 hashes and exact prompt templates from
+`experiment_agentic.py` using AST parsing without executing the experiment code.
+Update its explicit model list when adding further evaluated models. A normal
+website build only needs the committed aggregate data, not the research checkout.
 
 ## Preview locally
 

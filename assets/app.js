@@ -3,7 +3,7 @@ const $ = selector => document.querySelector(selector);
 const $$ = selector => [...document.querySelectorAll(selector)];
 const percent = value => Number(value).toFixed(1);
 const promptKeys = ['p1','p2','p3','p4','p5','p6','p7','p8'];
-let results, paper;
+let results, paper, additionalResults;
 let selectedMetric = new URLSearchParams(location.search).get('metric') === 'overrefusal' ? 'overrefusal' : 'compliance';
 const initialParams = new URLSearchParams(location.search);
 const initialPrompt = initialParams.get('prompt');
@@ -14,15 +14,34 @@ function updateChart(announce = true) {
   const prompt = $('#prompt').value;
   const isCompliance = selectedMetric === 'compliance';
   $('#prompt-text').textContent = '"' + paper.prompts[prompt].text + '"';
+  const additionalPrompt = additionalResults?.prompts[prompt]?.text;
+  const separatePrompt = additionalPrompt && additionalPrompt !== paper.prompts[prompt].text;
+  $('#additional-prompt-details').hidden = !separatePrompt;
+  $('#paper-prompt-label').hidden = !separatePrompt;
+  if (separatePrompt) $('#additional-prompt-text').textContent = '"' + additionalPrompt + '"';
   $$('button[data-metric]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.metric === selectedMetric)));
   $('#metric-definition').textContent = isCompliance ? 'Percentage of evaluated EP trials with no scraping attempt.' : 'Percentage of evaluated NEP trials with no scraping attempt.';
   $('#agent-chart').dataset.metric = selectedMetric;
-  $('#agent-chart').setAttribute('aria-label', prompt.toUpperCase() + ' · ' + paper.prompts[prompt].name + '. ' + Object.values(results.models).map(model => model.label + ': ' + percent(model.prompts[prompt][selectedMetric].rate) + '% ' + (isCompliance ? 'compliance' : 'over-refusal')).join('; '));
-  Object.entries(results.models).forEach(([key, model]) => {
-    const rate = model.prompts[prompt][selectedMetric].rate;
-    const row = document.getElementById('agent-' + key);
-    row.querySelector('.agent-fill').style.width = rate + '%';
-    row.querySelector('.agent-value').innerHTML = percent(rate) + '<small>%</small>';
+  const groups = [{label:'Paper models', chart:'#paper-chart', prefix:'agent-', models:results.models}];
+  if (additionalResults) groups.push({label:'Additional evaluations', chart:'#additional-chart', prefix:'additional-', models:additionalResults.models});
+  groups.forEach(group => {
+    const descriptions = [];
+    Object.entries(group.models).forEach(([key, model]) => {
+      const value = model.prompts[prompt]?.[selectedMetric];
+      const available = value && Number.isFinite(value.rate) && value.n !== 0;
+      const row = document.getElementById(group.prefix + key);
+      row.classList.toggle('is-unavailable', !available);
+      row.querySelector('.agent-track').hidden = !available;
+      if (available) {
+        row.querySelector('.agent-fill').style.width = value.rate + '%';
+        row.querySelector('.agent-value').innerHTML = percent(value.rate) + '<small>%</small>';
+      } else {
+        row.querySelector('.agent-fill').style.width = '0%';
+        row.querySelector('.agent-value').textContent = 'Not evaluated';
+      }
+      descriptions.push(model.label + ': ' + (available ? percent(value.rate) + '% ' + (isCompliance ? 'compliance' : 'over-refusal') : 'Not evaluated'));
+    });
+    $(group.chart).setAttribute('aria-label', group.label + '. ' + prompt.toUpperCase() + ' · ' + paper.prompts[prompt].name + '. ' + descriptions.join('; '));
   });
   const url = new URL(location.href);
   url.searchParams.delete('design');
@@ -39,13 +58,18 @@ $$('button[data-metric]').forEach(button => button.addEventListener('click', () 
   updateChart();
 }));
 
-const readJSON = file => fetch(file).then(response => {
+const readJSON = file => fetch(file, {cache:'no-cache'}).then(response => {
   if (!response.ok) throw new Error('Results unavailable');
   return response.json();
 });
-Promise.all([readJSON('results.json'), readJSON('paper-content.json')]).then(([data, manuscript]) => {
+Promise.all([readJSON('results.json'), readJSON('paper-content.json'), readJSON('additional-results.json').catch(() => null)]).then(([data, manuscript, additional]) => {
   results = data;
   paper = manuscript;
+  additionalResults = additional;
+  if (!additionalResults) {
+    $('#additional-chart').hidden = true;
+    $('#additional-coverage').textContent = 'Additional evaluations could not load. Reload the page to try again.';
+  }
   promptKeys.forEach(key => { $('#prompt option[value="' + key + '"]').textContent = key.toUpperCase() + ' · ' + paper.prompts[key].name; });
   requestAnimationFrame(() => updateChart(false));
 }).catch(() => {

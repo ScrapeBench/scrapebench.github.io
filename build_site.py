@@ -18,6 +18,7 @@ for directory in ('assets', 'data'):
 (DIST / '.nojekyll').touch()
 paper = json.loads((DIST / 'paper-content.json').read_text(encoding='utf-8'))
 data = json.loads((DIST / 'results.json').read_text(encoding='utf-8'))
+additional = json.loads((DIST / 'additional-results.json').read_text(encoding='utf-8'))
 esc = html.escape
 logos = {
     'gpt52': 'gpt_logo.png', 'claudeopus46': 'claude_logo.png',
@@ -42,6 +43,24 @@ for key, model in data['models'].items():
         f'<strong class="agent-value">{value}<small>%</small></strong></div>'
     )
     chart_label.append(f'{model["label"]}: {value}% compliance;')
+
+additional_rows = []
+additional_chart_label = ['Additional evaluations. P1 · Neutral (Baseline).']
+for key, model in additional['models'].items():
+    baseline = model['prompts']['p1']['compliance']
+    value = rate(baseline['rate'])
+    logo = model.get('logo')
+    logo_markup = (
+        f'<img class="model-logo" src="logos/{esc(logo)}" alt="" width="32" height="32" loading="lazy">'
+        if logo else '<span class="model-logo" aria-hidden="true"></span>'
+    )
+    additional_rows.append(
+        f'<div class="agent-row" id="additional-{esc(key)}">'
+        f'<span class="agent-name">{logo_markup}<span>{esc(model["label"])}</span></span>'
+        f'<div class="agent-track" aria-hidden="true"><div class="agent-fill" style="width:{value}%"></div></div>'
+        f'<strong class="agent-value">{value}<small>%</small></strong></div>'
+    )
+    additional_chart_label.append(f'{model["label"]}: {value}% compliance;')
 
 human_rows = []
 human_chart_label = ['Human baseline.']
@@ -76,7 +95,9 @@ replacements = {
     '__SCRIPT_URL__': script_name,
     '__PROMPT_OPTIONS__': ''.join(f'<option value="{key}">{key.upper()} · {esc(item["name"])}</option>' for key, item in paper['prompts'].items()),
     '__AGENT_ROWS__': ''.join(rows),
-    '__INITIAL_CHART_LABEL__': esc(' '.join(chart_label)),
+    '__INITIAL_CHART_LABEL__': esc('Paper models. ' + ' '.join(chart_label)),
+    '__ADDITIONAL_ROWS__': ''.join(additional_rows),
+    '__ADDITIONAL_CHART_LABEL__': esc(' '.join(additional_chart_label)),
     '__HUMAN_ROWS__': ''.join(human_rows),
     '__HUMAN_CHART_LABEL__': esc(' '.join(human_chart_label)),
     '__BASELINE_HEADING__': esc(paper['findings']['result1']['title']),
