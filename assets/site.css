@@ -100,7 +100,7 @@ select{display:block;width:100%;min-height:56px;padding:12px 34px 12px 13px;bord
 .results-chart{min-width:0}.metric-definition{color:var(--muted);font-size:var(--small);line-height:1.6}
 .chart-group{margin-top:24px}.chart-group+.chart-group{margin-top:28px;padding-top:25px;border-top:1px solid var(--line)}
 .chart-group-title{font-size:21px;line-height:1.4;letter-spacing:-.018em}
-.chart-group-description{margin-top:14px;font-size:var(--body);line-height:1.65}
+.chart-group-description{margin-top:14px;color:var(--muted);font-size:var(--small);line-height:1.65}
 .chart-group-note{margin-top:12px;color:var(--muted);font-size:var(--small);line-height:1.6}
 .agent-row.is-unavailable .agent-value{grid-column:2/-1;font-size:var(--small);white-space:normal}
 .agent-track[hidden]{display:none}
