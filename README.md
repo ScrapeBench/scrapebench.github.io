@@ -26,7 +26,7 @@ This repository is independent of the paper repository. It contains the website 
 
 Keep manuscript terminology and reported values intact unless the authors request a correction.
 
-To add the paper link later, set `paperUrl` to the full HTTPS URL in `data/site-config.json`. The website will show the paper link and add it to the displayed citation. Until then, keep it `null`; Code & Data continues to use the anonymous resource link.
+To add the paper link later, set `paperUrl` to the full HTTPS URL in `data/site-config.json`. The website will show the paper link and add it to the displayed citation. Until then, keep it `null`. Code & Data links to https://github.com/imperialite/scrapebench.
 
 ## Newer model evaluations
 
