@@ -88,21 +88,6 @@ $('#copy-citation').addEventListener('click', async () => {
   }
 });
 
-// Add the public paper later by changing paperUrl in site-config.json.
-fetch('site-config.json').then(response => {
-  if (!response.ok) throw new Error('Configuration unavailable');
-  return response.json();
-}).then(config => {
-  const isHTTPS = value => {try {return new URL(value).protocol === 'https:';} catch {return false;}};
-  if (isHTTPS(config.resourcesUrl)) $$('.resource-link').forEach(link => {link.href = config.resourcesUrl;});
-  if (isHTTPS(config.paperUrl)) {
-    const link = document.createElement('a');
-    link.id = 'paper-link'; link.href = config.paperUrl; link.target = '_blank'; link.rel = 'noopener'; link.textContent = 'Read the Paper ↗';
-    $('#paper-link').replaceWith(link);
-    $('#citation').textContent = $('#citation').textContent.replace('  year = {2026}', '  year = {2026},\n  url = {' + config.paperUrl + '}');
-  }
-}).catch(() => {});
-
 // Keep looping while the page is active, including when only part of the scene is visible.
 const taskScene = $('.task-scene');
 const sceneMotion = window.matchMedia('(prefers-reduced-motion: reduce)');

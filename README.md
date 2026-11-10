@@ -26,7 +26,7 @@ This repository is independent of the paper repository. It contains the website 
 
 Keep manuscript terminology and reported values intact unless the authors request a correction.
 
-To add the paper link later, set `paperUrl` to the full HTTPS URL in `data/site-config.json`. The website will show the paper link and add it to the displayed citation. Until then, keep it `null`. Code & Data links to https://github.com/imperialite/scrapebench.
+Set `paperUrl` and `resourcesUrl` in `data/site-config.json`, then rebuild with `python build_site.py`. The build embeds these links directly in the page and includes the paper URL in the citation. Paper links to https://arxiv.org/abs/2611.11306. Code & Data links to https://github.com/imperialite/scrapebench.
 
 ## Newer model evaluations
 

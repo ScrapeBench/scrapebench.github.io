@@ -1,6 +1,7 @@
 """Build the research website from the verified paper extracts and result data."""
 from pathlib import Path
 from decimal import Decimal, ROUND_HALF_UP
+from urllib.parse import urlsplit
 import hashlib
 import html
 import json
@@ -20,6 +21,16 @@ paper = json.loads((DIST / 'paper-content.json').read_text(encoding='utf-8'))
 data = json.loads((DIST / 'results.json').read_text(encoding='utf-8'))
 additional = json.loads((DIST / 'additional-results.json').read_text(encoding='utf-8'))
 esc = html.escape
+config = json.loads((ROOT / 'data' / 'site-config.json').read_text(encoding='utf-8'))
+resources_url = config['resourcesUrl']
+paper_url = config.get('paperUrl')
+for url in (resources_url, paper_url):
+    if url is not None and (urlsplit(url).scheme != 'https' or not urlsplit(url).netloc):
+        raise ValueError('Website links must use an absolute HTTPS URL.')
+paper_link = (
+    f'<a id="paper-link" href="{esc(paper_url)}" target="_blank" rel="noopener">Paper ↗</a>'
+    if paper_url else '<span id="paper-link">Paper Link Forthcoming</span>'
+)
 logos = {
     'gpt52': 'gpt_logo.png', 'claudeopus46': 'claude_logo.png',
     'gemini31pro': 'gemini_logo.png', 'kimik25': 'kimi_logo.png',
@@ -91,6 +102,9 @@ script_name = f'app.{hashlib.sha256(script).hexdigest()[:12]}.js'
 (DIST / script_name).write_bytes(script)
 
 replacements = {
+    '__RESOURCES_URL__': esc(resources_url),
+    '__PAPER_LINK__': paper_link,
+    '__PAPER_CITATION_URL__': ',\n  url = {' + esc(paper_url) + '}' if paper_url else '',
     '__STYLE_URL__': stylesheet_name,
     '__SCRIPT_URL__': script_name,
     '__PROMPT_OPTIONS__': ''.join(f'<option value="{key}">{key.upper()} · {esc(item["name"])}</option>' for key, item in paper['prompts'].items()),

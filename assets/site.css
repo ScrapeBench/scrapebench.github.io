@@ -28,7 +28,7 @@ h1{font-size:var(--h1);line-height:1.06;letter-spacing:-.055em}h2{font-size:var(
 .authors sup,.affiliations sup{position:relative;top:-.45em;font-size:.7em;line-height:0;vertical-align:baseline}
 .affiliations sup{margin-right:.15em}
 .hero-links{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:14px 25px;margin-top:27px;font-size:var(--small)}.hero-links a{font-weight:500}
-#paper-link{color:var(--muted)}
+span#paper-link{color:var(--muted)}
 .task-scene{display:grid;grid-template-columns:minmax(190px,1fr) 38px 160px 170px minmax(230px,1fr);grid-template-areas:'task incoming agent transfer website';align-items:center;column-gap:0;row-gap:25px;margin-top:55px;padding:34px 0 27px;border-block:1px solid var(--line)}
 .task-card{grid-area:task;min-width:0;padding:23px 25px;background:#fffdf9;border:1px solid var(--line);border-radius:6px}
 .scene-label{display:block;color:var(--muted);font-size:var(--small);font-weight:500}
