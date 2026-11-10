@@ -74,6 +74,101 @@ Promise.all([readJSON('results.json'), readJSON('paper-content.json'), readJSON(
   $('#results-status').textContent = 'The interactive results could not be loaded.';
 });
 
+// Definitions open on hover, keyboard focus, or tap without changing the text flow.
+let activeTermHelp = null;
+let termHelpPinned = false;
+let termHelpDismissTimer;
+
+function closeTermHelp() {
+  clearTimeout(termHelpDismissTimer);
+  if (!activeTermHelp) return;
+  activeTermHelp.querySelector('.term-tooltip').hidden = true;
+  activeTermHelp.querySelector('.term-trigger').setAttribute('aria-expanded', 'false');
+  activeTermHelp = null;
+  termHelpPinned = false;
+}
+
+function positionTermHelp() {
+  if (!activeTermHelp) return;
+  const trigger = activeTermHelp.querySelector('.term-trigger');
+  const tooltip = activeTermHelp.querySelector('.term-tooltip');
+  const anchor = trigger.getBoundingClientRect();
+  const viewport = window.visualViewport;
+  const leftEdge = viewport?.offsetLeft || 0;
+  const topEdge = viewport?.offsetTop || 0;
+  const viewportWidth = viewport?.width || window.innerWidth;
+  const viewportHeight = viewport?.height || window.innerHeight;
+  const margin = 12;
+  const gap = 10;
+  if (anchor.bottom < topEdge || anchor.top > topEdge + viewportHeight) {
+    closeTermHelp();
+    return;
+  }
+  tooltip.style.maxWidth = Math.max(0, viewportWidth - margin * 2) + 'px';
+  tooltip.style.maxHeight = Math.max(0, viewportHeight - margin * 2) + 'px';
+  const box = tooltip.getBoundingClientRect();
+  const left = Math.max(leftEdge + margin, Math.min(anchor.left + anchor.width / 2 - box.width / 2, leftEdge + viewportWidth - box.width - margin));
+  let top = anchor.bottom + gap;
+  if (top + box.height > topEdge + viewportHeight - margin) top = anchor.top - box.height - gap;
+  top = Math.max(topEdge + margin, Math.min(top, topEdge + viewportHeight - box.height - margin));
+  tooltip.style.left = left + 'px';
+  tooltip.style.top = top + 'px';
+}
+
+function openTermHelp(help) {
+  clearTimeout(termHelpDismissTimer);
+  if (activeTermHelp !== help) {
+    closeTermHelp();
+    activeTermHelp = help;
+  }
+  help.querySelector('.term-tooltip').hidden = false;
+  help.querySelector('.term-trigger').setAttribute('aria-expanded', 'true');
+  positionTermHelp();
+}
+
+$$('.term-help').forEach(help => {
+  const trigger = help.querySelector('.term-trigger');
+  const tooltip = help.querySelector('.term-tooltip');
+  trigger.addEventListener('pointerenter', event => {
+    if (event.pointerType !== 'touch') openTermHelp(help);
+  });
+  trigger.addEventListener('focus', () => {
+    if (trigger.matches(':focus-visible')) openTermHelp(help);
+  });
+  trigger.addEventListener('click', () => {
+    if (activeTermHelp === help && termHelpPinned) closeTermHelp();
+    else {
+      openTermHelp(help);
+      termHelpPinned = true;
+    }
+  });
+  const scheduleDismiss = () => {
+    if (activeTermHelp === help && !termHelpPinned && !trigger.matches(':focus-visible')) {
+      clearTimeout(termHelpDismissTimer);
+      termHelpDismissTimer = setTimeout(closeTermHelp, 180);
+    }
+  };
+  help.addEventListener('pointerleave', scheduleDismiss);
+  tooltip.addEventListener('pointerenter', () => clearTimeout(termHelpDismissTimer));
+  tooltip.addEventListener('pointerleave', scheduleDismiss);
+  help.addEventListener('focusout', event => {
+    if (activeTermHelp === help && event.relatedTarget && !help.contains(event.relatedTarget)) closeTermHelp();
+  });
+});
+document.addEventListener('pointerdown', event => {
+  if (activeTermHelp && !activeTermHelp.contains(event.target)) closeTermHelp();
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && activeTermHelp) {
+    closeTermHelp();
+    event.preventDefault();
+  }
+});
+window.addEventListener('resize', positionTermHelp);
+window.addEventListener('scroll', positionTermHelp, true);
+window.visualViewport?.addEventListener('resize', positionTermHelp);
+window.visualViewport?.addEventListener('scroll', positionTermHelp);
+
 $('#copy-citation').addEventListener('click', async () => {
   try {
     await navigator.clipboard.writeText($('#citation').textContent);

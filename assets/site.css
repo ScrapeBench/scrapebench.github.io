@@ -77,6 +77,11 @@ span#paper-link{color:var(--muted)}
 @keyframes html-received{0%,49.99%{opacity:0}50%,100%{opacity:1}}
 @keyframes agent-read{0%,10%,28%,49%,100%{transform:none}16%,24%{transform:translateY(-3px) rotate(2deg)}}
 .introduction{max-width:840px;margin:37px auto 0}.introduction>p+p{margin-top:17px}
+.term-trigger{display:inline;padding:0;border:0;border-radius:2px;background:none;font:inherit;font-weight:600;line-height:inherit;color:inherit;text-decoration:underline dotted var(--plum);text-underline-offset:4px;text-decoration-thickness:1px;cursor:help}
+.term-trigger:hover,.term-trigger[aria-expanded=true]{color:var(--plum)}
+.term-tooltip{position:fixed;z-index:30;display:block;width:min(360px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto;padding:15px 18px;border:1px solid #cbbdd1;border-radius:7px;background:#fffdf9;color:var(--ink);box-shadow:0 5px 20px rgb(56 51 47 / 12%);font-size:16px;font-weight:400;line-height:1.6;text-align:left}
+.term-tooltip[hidden]{display:none}
+@media print{.term-tooltip{display:none!important}.term-trigger{text-decoration:none}}
 .definitions{margin-top:27px;padding-top:26px;border-top:1px solid var(--line)}.definitions p+p{margin-top:16px}
 .keep-together{white-space:nowrap}
 .metric-word{white-space:nowrap;padding:1px 5px 2px;border-radius:2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
