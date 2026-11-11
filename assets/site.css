@@ -19,6 +19,7 @@ h1{font-size:var(--h1);line-height:1.06;letter-spacing:-.055em}h2{font-size:var(
 
 /* The agent sits in a task scene without any portrait backing. */
 .overview{padding:64px 0 84px}.hero-heading{max-width:880px;margin:0 auto;text-align:center}
+.conference-logo{display:block;width:240px;height:auto;margin:0 auto 20px}
 .conference{margin-bottom:22px;color:var(--plum);font-size:var(--small);font-weight:500;line-height:1.6}.conference strong{font-weight:600}
 .paper-title{max-width:790px;margin:21px auto 0;font-size:30px;line-height:1.4;letter-spacing:-.022em;text-wrap:balance}
 .authors{display:block;margin-top:26px;color:var(--ink);font-size:20px;font-weight:500;line-height:1.65}
