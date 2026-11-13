@@ -169,18 +169,35 @@ window.addEventListener('scroll', positionTermHelp, true);
 window.visualViewport?.addEventListener('resize', positionTermHelp);
 window.visualViewport?.addEventListener('scroll', positionTermHelp);
 
-$('#copy-citation').addEventListener('click', async () => {
-  try {
-    await navigator.clipboard.writeText($('#citation').textContent);
-    $('#copy-status').textContent = 'Copied';
-  } catch {
-    const range = document.createRange();
-    range.selectNodeContents($('#citation'));
-    const selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
-    $('#copy-status').textContent = 'Citation selected. Use your copy command.';
-  }
+$$('[data-copy-citation]').forEach(button => {
+  button.addEventListener('click', async () => {
+    const citation = document.getElementById(button.dataset.copyCitation);
+    const status = document.getElementById(button.dataset.copyStatus);
+    const plainText = citation.textContent.trim();
+    $$('.copy-status').forEach(item => { item.textContent = ''; });
+    try {
+      if (citation.id === 'citation-apa' && window.ClipboardItem && navigator.clipboard?.write) {
+        try {
+          await navigator.clipboard.write([new ClipboardItem({
+            'text/plain': new Blob([plainText], { type: 'text/plain' }),
+            'text/html': new Blob(['<p>' + citation.innerHTML + '</p>'], { type: 'text/html' })
+          })]);
+        } catch {
+          await navigator.clipboard.writeText(plainText);
+        }
+      } else {
+        await navigator.clipboard.writeText(plainText);
+      }
+      status.textContent = 'Copied';
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(citation);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      status.textContent = 'Citation selected. Use your copy command.';
+    }
+  });
 });
 
 // Keep looping while the page is active, including when only part of the scene is visible.

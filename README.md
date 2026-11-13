@@ -28,6 +28,12 @@ Keep manuscript terminology and reported values intact unless the authors reques
 
 Set `paperUrl` and `resourcesUrl` in `data/site-config.json`, then rebuild with `python build_site.py`. The build embeds these links directly in the page and includes the paper URL in the citation. Paper links to https://arxiv.org/abs/2611.11306. Code & Data links to https://github.com/imperialite/scrapebench.
 
+## Citation
+
+The website displays BibTeX and APA versions with separate copy buttons. APA copying preserves italics in applications that support HTML clipboard content and also supplies plain text. Both citation links come from `paperUrl` in `data/site-config.json`.
+
+The [NeurIPS 2026 E&D FAQ](https://neurips.cc/Conferences/2026/EvaluationsDatasetsFAQ) confirms that this track shares the main proceedings. [NeurIPS lists ScrapeBench](https://neurips.cc/virtual/2026/poster/139442), and [arXiv](https://arxiv.org/abs/2611.11306) confirms the title and authors. As checked on 13 November 2026, the [official proceedings index](https://proceedings.neurips.cc/) has no 2026 volume. The citations therefore omit unverified volume, editor, publisher, and page fields. Update both formats when the final proceedings record becomes available.
+
 ## Newer model evaluations
 
 The chart shows the original models first, followed by **Newer model evaluations**. The original

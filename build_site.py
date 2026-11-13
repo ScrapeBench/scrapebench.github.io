@@ -105,6 +105,7 @@ replacements = {
     '__RESOURCES_URL__': esc(resources_url),
     '__PAPER_LINK__': paper_link,
     '__PAPER_CITATION_URL__': ',\n  url = {' + esc(paper_url) + '}' if paper_url else '',
+    '__PAPER_CITATION_LINK__': f' <a href="{esc(paper_url)}">{esc(paper_url)}</a>' if paper_url else '',
     '__STYLE_URL__': stylesheet_name,
     '__SCRIPT_URL__': script_name,
     '__PROMPT_OPTIONS__': ''.join(f'<option value="{key}">{key.upper()} · {esc(item["name"])}</option>' for key, item in paper['prompts'].items()),
